@@ -7,7 +7,7 @@ import java.io.IOException;
 
 // Tutorial: https://www.youtube.com/watch?v=tH2On9Z1D4Y
 
-public class J5_ver2 {
+public class J5_EscapeRoom2 {
 
 	public static void main(String[] args) throws IOException{
 		
