@@ -1,4 +1,4 @@
-Canadian Computing Contest Unofficial Solutions 
+# Canadian Computing Contest Unofficial Solutions 
 
 These are unofficial solutions written by myself in the attempt to practice competitive programming. Practice makes perfect!
 
@@ -9,6 +9,8 @@ I really appreciate any help/suggestions to enhance my codes!
 ----------
 
 All the challenges are marked by the CCC Online Grader (https://cccgrader.com)
+
+Past Contests and Solutions (https://cemc.uwaterloo.ca/contests/past_contests.html#ccc)
 
 *I will keep this list updated as I complete more challenges or find better solutions.*
 
