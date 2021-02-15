@@ -1,0 +1,106 @@
+import java.util.List;
+import java.util.Arrays;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+// Tutorial: https://www.youtube.com/watch?v=tH2On9Z1D4Y
+
+public class J5_ver2 {
+
+	public static void main(String[] args) throws IOException{
+		
+		// READ INPUT
+		BufferedReader input = new BufferedReader(new FileReader("j5.02.05.in"));
+		BufferedReader output = new BufferedReader(new FileReader("j5.02.05.out"));
+		System.out.println("Wanted answer: " + output.readLine());
+		
+		int M = Integer.parseInt(input.readLine());
+		System.out.println("M: " + M);
+		int N = Integer.parseInt(input.readLine());
+		System.out.println("N: " + N);
+		
+		int size = M * N; // target product = target value = max steps to reach target
+		System.out.println("Size: " + size);
+		
+		int [][] table = new int [M+1][N+1];
+		
+		System.out.println();
+		
+		// pass inputs into a table
+		for (int i = 1; i < table.length; i++) {
+			String row = input.readLine();
+			String [] splitedRow = row.split(" ");
+			
+			for (int j = 1; j < table[i].length; j++) {
+				table[i][j] = Integer.parseInt(splitedRow[j-1]);
+				System.out.print(table[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		
+		// SET UP PATHWAYS - Breadth First Search Algorithm
+		int [] pathways = new int [size];
+		
+		// huge array of false boolean
+		// if pathways later find a potential target, set its corresponding boolean to true
+		// faster search because there is no loop
+		// system accesses directly to the location
+		boolean alreadyIn[] = new boolean [1000001];
+		
+		for (int x = 0; x < pathways.length; x++) {
+			pathways[x] = -1;
+		}
+		
+		int emptySpot = 0, currentValue = 0, tableXY;
+		
+		pathways[emptySpot] = table[1][1];
+		alreadyIn[table[1][1]] = true;
+		emptySpot++;
+		
+		if (pathways[currentValue] == size) {
+			System.out.println("yes");
+			System.exit(0);
+		}
+		
+		do {
+			System.out.println("current value: " + pathways[currentValue]);
+			
+			 for (int x = 1; x < table.length; x++) {
+				if (pathways[currentValue] % x == 0) {
+					 for (int y = 1; y < table[x].length; y++) {
+					
+						tableXY = table[x][y];
+						
+						if (x*y == pathways[currentValue]) {
+							if (tableXY == size) {
+								System.out.println("--final step: " + tableXY + " at " + x +","+y);
+								System.out.println("yes");
+								System.exit(0);
+							}
+							
+							// adding potential values to pathway
+							if (alreadyIn[tableXY] == false) {
+								pathways[emptySpot] = table[x][y];
+								alreadyIn[tableXY] = true;
+								System.out.println("--branch: " + pathways[emptySpot] + " at " + x + "," + y);
+								emptySpot++;
+							}
+						} // if
+					} // for
+				}
+				
+			} // for
+			 
+			currentValue++;
+			
+			
+		} while (pathways[currentValue] != -1);
+		
+		System.out.println("no");
+		
+	} // main
+
+} // J5
